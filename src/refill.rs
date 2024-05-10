@@ -290,6 +290,17 @@ mod tests {
     }
 
     #[test]
+    fn unfill_tabs() {
+        let (text, options) = unfill("\t// foo bar\n\t// baz");
+        assert_eq!(text, "foo bar baz");
+        // The resulting width includes the width of a tab character, which is
+        // currently zero (see #419).
+        assert_eq!(options.width, 11);
+        assert_eq!(options.initial_indent, "\t// ");
+        assert_eq!(options.subsequent_indent, "\t// ");
+    }
+
+    #[test]
     fn unfill_block_quote() {
         let (text, options) = unfill("> foo\n> bar\n> baz");
         assert_eq!(text, "foo bar baz");
