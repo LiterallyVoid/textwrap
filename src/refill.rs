@@ -60,7 +60,7 @@ use crate::{fill, LineEnding, Options};
 /// assert_eq!(options.line_ending, LineEnding::LF);
 /// ```
 pub fn unfill(text: &str) -> (String, Options<'_>) {
-    let prefix_chars: &[_] = &[' ', '-', '+', '*', '>', '#', '/'];
+    let prefix_chars: &[_] = &['\t', ' ', '-', '+', '*', '>', '#', '/'];
 
     let mut options = Options::new(0);
     for (idx, line) in text.lines().enumerate() {
